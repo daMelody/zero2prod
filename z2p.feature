@@ -5,7 +5,7 @@ Feature: Email Newsletter
     Scenario: Subscribe to Newsletter
         Given I am subscribed to the newsletter
         When new content is published on the blog
-        Then I want to receive email updates
+        Then I will receive email updates
 
     Scenario: Unsubscribe to Newletter
         Given I am subscribed to the newsletter
@@ -13,5 +13,6 @@ Feature: Email Newsletter
         Then I should no longer receive email updates
 
     Scenario: Send email update to subscribers
-        Given I am the blog auther
-        When Start to type your When step here
+        Given I am the blog author
+        When I post new content to my blog
+        Then my subscribers will receive an email update
