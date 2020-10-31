@@ -8,7 +8,7 @@ use zero2prod::telemetry::{get_subscriber, init_subscriber};
 
 lazy_static::lazy_static! {
     static ref TRACING: () = {
-        let filter = if std::env::var("TEST_LOG").is_ok() { "debug" } else { "" };
+        let _filter = if std::env::var("TEST_LOG").is_ok() { "debug" } else { "" };
         let subscriber = get_subscriber("test".into(), "debug".into());
         init_subscriber(subscriber);
     };
