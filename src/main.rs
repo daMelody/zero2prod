@@ -1,12 +1,16 @@
-use env_logger::Env;
+//external
 use sqlx::PgPool;
 use std::net::TcpListener;
+// internal
 use zero2prod::configuration::get_configuration;
 use zero2prod::startup::run;
+use zero2prod::telemetry::{get_subscriber, init_subscriber};
 
 #[actix_rt::main]
 async fn main() -> std::io::Result<()> {
-    env_logger::from_env(Env::default().default_filter_or("info")).init();
+    // Set up tracing/logging pipeline
+    let subscriber = get_subscriber("zero2prod".into(), "info".into());
+    init_subscriber(subscriber);
     // Panic if can't read config
     let configuration = get_configuration().expect("Failed to read configuration.");
     let connection_pool = PgPool::connect(&configuration.database.connection_string())
